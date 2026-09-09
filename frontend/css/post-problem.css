@@ -1,0 +1,65 @@
+﻿/* ===================================================================
+   post-problem.css
+   =================================================================== */
+
+.form-shell {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.form-shell .card {
+  padding: 32px;
+}
+
+.file-drop {
+  border: 1.5px dashed var(--color-line);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  text-align: center;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  background: var(--color-navy-100);
+}
+
+.file-drop:hover {
+  border-color: var(--color-navy-500);
+}
+
+.file-drop input {
+  display: none;
+}
+
+.file-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+}
+
+.file-list-item button {
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-line);
+}

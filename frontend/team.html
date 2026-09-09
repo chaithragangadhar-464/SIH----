@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teams — Problem2Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/team.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container page-section">
+    <div id="team-loading"><div class="state-message"><div class="spinner"></div><p>Loading your teams...</p></div></div>
+
+    <div id="team-content" hidden>
+      <div class="team-header">
+        <div>
+          <h1 id="team-name-heading">Team</h1>
+          <p class="lede" id="team-problem-link"></p>
+        </div>
+        <button type="button" class="btn btn--primary" id="invite-toggle">Invite Member</button>
+      </div>
+
+      <div class="card" id="invite-panel" hidden style="margin-bottom:28px;">
+        <h3>Invite a Member</h3>
+        <form id="invite-form">
+          <div class="field-row">
+            <div class="field">
+              <label for="invite-email">Email or username</label>
+              <input type="text" id="invite-email" required />
+            </div>
+            <div class="field">
+              <label for="invite-role">Proposed role</label>
+              <input type="text" id="invite-role" placeholder="e.g. Backend developer" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn--ghost" id="invite-cancel">Cancel</button>
+            <button type="submit" class="btn btn--primary">Send Invite</button>
+          </div>
+        </form>
+      </div>
+
+      <section class="dashboard-section">
+        <h2>Members</h2>
+        <div id="member-list" class="member-list"></div>
+      </section>
+
+      <section class="dashboard-section" id="invitations-section">
+        <h2>Pending Invitations</h2>
+        <div id="invitations-list" class="invite-list"></div>
+      </section>
+
+      <section class="dashboard-section">
+        <h2>Recommended Collaborators</h2>
+        <div id="collaborators-list"><div class="spinner"></div></div>
+      </section>
+    </div>
+
+    <div id="team-empty" hidden></div>
+    <div id="team-error" hidden></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; 2026 Problem2Impact</span>
+      <span>Built to connect societal challenges with the people who can solve them.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/team.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solution Details — Problem2Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/solutions.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container page-section">
+    <div id="sd-loading"><div class="state-message"><div class="spinner"></div><p>Loading solution...</p></div></div>
+
+    <div id="sd-content" hidden>
+      <div class="selected-banner" id="selected-banner" hidden>
+        <h2>🏆 Selected Solution</h2>
+        <p id="selected-reason"></p>
+      </div>
+
+      <div class="solution-details-layout">
+        <div>
+          <h1 id="sd-title"></h1>
+          <p class="lede" id="sd-problem-link"></p>
+
+          <div class="sd-block">
+            <h3>Detailed Solution</h3>
+            <p id="sd-description"></p>
+          </div>
+          <div class="sd-block">
+            <h3>How does this solve the problem?</h3>
+            <p id="sd-how"></p>
+          </div>
+          <div class="sd-block" id="sd-tech-block">
+            <h3>Technology Used</h3>
+            <p id="sd-tech"></p>
+          </div>
+          <div class="sd-block" id="sd-plan-block">
+            <h3>Implementation Plan</h3>
+            <p id="sd-plan"></p>
+          </div>
+          <div class="sd-block" id="sd-links-block">
+            <h3>Links & Documents</h3>
+            <div id="sd-links" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
+          </div>
+
+          <div class="sd-block">
+            <h3>Ratings</h3>
+            <div id="ratings-summary"><div class="spinner"></div></div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="sidebar-card">
+            <div class="stat-row"><span>Status</span><span id="sd-status"></span></div>
+            <div class="stat-row"><span>Team</span><span id="sd-team"></span></div>
+            <div class="stat-row"><span>Estimated Cost</span><span id="sd-cost"></span></div>
+            <div class="stat-row"><span>Timeline</span><span id="sd-timeline"></span></div>
+            <div class="stat-row"><span>Expected Impact</span><span id="sd-impact"></span></div>
+          </div>
+
+          <div class="sidebar-card" id="evaluator-panel" hidden>
+            <h4>Rate this Solution</h4>
+            <a href="evaluation.html" class="btn btn--outline btn--full btn--small">Go to Evaluation</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div id="sd-error" hidden></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; 2026 Problem2Impact</span>
+      <span>Built to connect societal challenges with the people who can solve them.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/solution-details.js"></script>
+</body>
+</html>

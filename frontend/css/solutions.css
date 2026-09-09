@@ -1,0 +1,91 @@
+﻿/* ===================================================================
+   solutions.css — solutions list + solution details
+   =================================================================== */
+
+.solution-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.solution-card .card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.solution-card .team-name {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.solution-card .rating-inline {
+  font-size: 0.85rem;
+  color: var(--color-amber-dark);
+  font-weight: 600;
+}
+
+.solution-details-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.sd-block {
+  margin-bottom: 24px;
+}
+
+.sd-block h3 {
+  margin-bottom: 8px;
+}
+
+.link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: var(--color-navy-100);
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stars {
+  color: var(--color-amber);
+  letter-spacing: 1px;
+}
+
+.rating-item {
+  padding: 12px 14px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+.rating-item .rating-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.selected-banner {
+  background: var(--color-amber-tint);
+  border: 1px solid #EAD2AE;
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+}
+
+.selected-banner h2 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}

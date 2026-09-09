@@ -1,0 +1,102 @@
+﻿/* ===================================================================
+   evaluation.css — rating + comparison + implementation shares styles
+   =================================================================== */
+
+.rating-form fieldset {
+  margin-bottom: 14px;
+}
+
+.star-input {
+  display: flex;
+  gap: 6px;
+}
+
+.star-input button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--color-line);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.star-input button.is-active {
+  color: var(--color-amber);
+}
+
+.comparison-table-wrap {
+  overflow-x: auto;
+}
+
+table.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+}
+
+table.comparison-table th,
+table.comparison-table td {
+  padding: 12px 14px;
+  border: 1px solid var(--color-line);
+  text-align: left;
+}
+
+table.comparison-table th {
+  background: var(--color-navy-100);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+table.comparison-table td.stars-cell {
+  color: var(--color-amber);
+  letter-spacing: 1px;
+}
+
+.eval-solution-picker {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.eval-solution-picker button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.86rem;
+}
+
+.eval-solution-picker button.is-active {
+  background: var(--color-navy-700);
+  color: #fff;
+  border-color: var(--color-navy-700);
+}
+
+.timeline {
+  border-left: 2px solid var(--color-line);
+  padding-left: 20px;
+  margin: 16px 0;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-navy-700);
+}
+
+.timeline-item .timeline-date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}

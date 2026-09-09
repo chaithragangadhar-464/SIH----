@@ -1,0 +1,101 @@
+﻿/* ===================================================================
+   problems.css — explore problems listing + filters
+   =================================================================== */
+
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  padding: 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  margin-bottom: 28px;
+}
+
+.filters-bar .field {
+  margin-bottom: 0;
+  min-width: 160px;
+  flex: 1;
+}
+
+.filters-bar .field--search {
+  flex: 2;
+  min-width: 220px;
+}
+
+.problem-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.problem-card .card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.problem-card .card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.problem-card .card-desc {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.problem-card .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-line);
+}
+
+.vote-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.vote-btn:hover {
+  background: var(--color-navy-100);
+}
+
+.vote-btn--active {
+  color: var(--color-navy-700);
+  border-color: var(--color-navy-700);
+  background: var(--color-navy-100);
+}
+
+.results-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}

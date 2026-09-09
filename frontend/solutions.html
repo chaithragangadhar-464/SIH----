@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solutions — Problem2Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/solutions.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container page-section">
+    <div class="page-header" style="border:none; padding-top:0; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+      <div>
+        <h1>Solutions</h1>
+        <p class="lede">Solutions your teams have submitted, grouped by the problem they respond to.</p>
+      </div>
+      <button type="button" class="btn btn--primary" id="new-solution-toggle">Submit a New Solution</button>
+    </div>
+
+    <div class="card" id="new-solution-panel" hidden style="margin-bottom:32px;">
+      <h3>Submit a Solution</h3>
+      <form id="new-solution-form">
+        <div class="field" id="field-ns-problem-id">
+          <label for="ns-problem-id">Problem ID</label>
+          <input type="text" id="ns-problem-id" required placeholder="e.g. the ID from the problem's URL" />
+          <div class="hint">Find this in the problem's page URL, e.g. problem-details.html?id=<strong>THIS PART</strong></div>
+        </div>
+        <div class="field" id="field-ns-title">
+          <label for="ns-title">Solution Title</label>
+          <input type="text" id="ns-title" required />
+        </div>
+        <div class="field" id="field-ns-detail">
+          <label for="ns-detail">Detailed Solution</label>
+          <textarea id="ns-detail" required></textarea>
+        </div>
+        <div class="field" id="field-ns-how">
+          <label for="ns-how">How does this solve the problem?</label>
+          <textarea id="ns-how" required></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field" id="field-ns-tech">
+            <label for="ns-tech">Technology Used</label>
+            <input type="text" id="ns-tech" />
+          </div>
+          <div class="field" id="field-ns-cost">
+            <label for="ns-cost">Estimated Cost</label>
+            <input type="text" id="ns-cost" />
+          </div>
+        </div>
+        <div class="field" id="field-ns-plan">
+          <label for="ns-plan">Implementation Plan</label>
+          <textarea id="ns-plan"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field" id="field-ns-impact">
+            <label for="ns-impact">Expected Impact</label>
+            <input type="text" id="ns-impact" />
+          </div>
+          <div class="field" id="field-ns-timeline">
+            <label for="ns-timeline">Timeline</label>
+            <input type="text" id="ns-timeline" />
+          </div>
+        </div>
+        <div class="field" id="field-ns-team">
+          <label for="ns-team">Team Members</label>
+          <input type="text" id="ns-team" placeholder="Comma-separated names or emails" />
+        </div>
+        <div class="field" id="field-ns-link">
+          <label for="ns-link">Prototype / Demo / GitHub Link</label>
+          <input type="url" id="ns-link" />
+        </div>
+        <div class="field">
+          <label for="ns-docs">Supporting Documents</label>
+          <input type="file" id="ns-docs" multiple />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn--ghost" id="new-solution-cancel">Cancel</button>
+          <button type="submit" class="btn btn--primary" id="new-solution-submit">Submit Solution</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="solutions-list"><div class="spinner"></div></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; 2026 Problem2Impact</span>
+      <span>Built to connect societal challenges with the people who can solve them.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/solutions.js"></script>
+</body>
+</html>
