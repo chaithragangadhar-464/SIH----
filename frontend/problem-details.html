@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problem Details — Problem2Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/problem-details.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container page-section" id="page-root">
+    <div id="problem-loading"><div class="state-message"><div class="spinner"></div><p>Loading problem...</p></div></div>
+
+    <div id="problem-content" hidden>
+      <div class="problem-details-layout">
+        <div>
+          <div class="pd-header">
+            <h1 id="pd-title"></h1>
+            <span class="badge" id="pd-priority-badge"></span>
+          </div>
+          <div class="pd-meta-row" id="pd-meta-row"></div>
+
+          <div class="ai-panel" id="ai-panel" hidden>
+            <h4>AI Classification</h4>
+            <div class="ai-fact-grid" id="ai-fact-grid"></div>
+          </div>
+          <div class="state-message" id="ai-unavailable" hidden style="margin-bottom:20px;">
+            <p>Sector classification is currently unavailable. The problem has still been submitted successfully.</p>
+          </div>
+
+          <div class="duplicate-panel" id="duplicate-panel" hidden>
+            <h4>Potentially Similar Problem</h4>
+            <p>We found an existing problem that may describe the same challenge.</p>
+            <p><strong>Similarity:</strong> <span id="duplicate-similarity"></span></p>
+            <div class="actions">
+              <a href="#" id="duplicate-view-link" class="btn btn--outline btn--small">View Existing Problem</a>
+              <button type="button" class="btn btn--ghost btn--small" id="duplicate-dismiss">Continue Anyway</button>
+            </div>
+          </div>
+
+          <div class="pd-block">
+            <h3>Description</h3>
+            <p id="pd-description"></p>
+          </div>
+          <div class="pd-block">
+            <h3>Who is affected?</h3>
+            <p id="pd-affected"></p>
+          </div>
+          <div class="pd-block">
+            <h3>Why it matters</h3>
+            <p id="pd-importance"></p>
+          </div>
+          <div class="pd-block" id="pd-evidence-block">
+            <h3>Evidence</h3>
+            <div class="pd-evidence-list" id="pd-evidence-list"></div>
+          </div>
+
+          <div class="pd-block" id="pd-solutions-block">
+            <h3>Solutions for this Problem</h3>
+            <div id="pd-solutions-list"><div class="spinner"></div></div>
+          </div>
+
+          <div class="pd-block" id="comments">
+            <h3>Comments</h3>
+            <div id="comments-list"><div class="spinner"></div></div>
+            <form id="comment-form" style="margin-top:16px;">
+              <div class="field">
+                <label for="comment-text">Add a comment</label>
+                <textarea id="comment-text" required placeholder="Share relevant context or a question..."></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--small">Post Comment</button>
+            </form>
+          </div>
+        </div>
+
+        <aside>
+          <div class="sidebar-card">
+            <div class="stat-row"><span>Status</span><span id="pd-status"></span></div>
+            <div class="stat-row"><span>Sector</span><span id="pd-sector"></span></div>
+            <div class="stat-row"><span>Location</span><span id="pd-location"></span></div>
+            <div class="stat-row"><span>Posted by</span><span id="pd-posted-by"></span></div>
+            <div class="stat-row"><span>Created</span><span id="pd-created"></span></div>
+          </div>
+
+          <button type="button" class="btn btn--primary btn--full" id="vote-btn" style="margin-bottom:12px;"></button>
+          <button type="button" class="btn btn--accent btn--full" id="solve-btn">I Want To Solve This</button>
+        </aside>
+      </div>
+    </div>
+
+    <div id="problem-error" hidden></div>
+  </main>
+
+  <!-- Solver interest modal-ish inline panel -->
+  <div id="solver-modal" hidden style="position:fixed; inset:0; background:rgba(16,24,43,0.5); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px;">
+    <div class="card" style="max-width:520px; width:100%;">
+      <h3>I Want To Solve This</h3>
+      <form id="solver-form">
+        <div class="field">
+          <label for="solver-why">Why do you want to solve this problem?</label>
+          <textarea id="solver-why" required></textarea>
+        </div>
+        <div class="field">
+          <label for="solver-skills">What skills can you contribute?</label>
+          <input type="text" id="solver-skills" required />
+        </div>
+        <div class="field">
+          <label for="solver-role">What role would you like to play?</label>
+          <input type="text" id="solver-role" required />
+        </div>
+        <div class="field">
+          <label for="solver-team">Would you like to form/join a team?</label>
+          <select id="solver-team">
+            <option value="form">Form a new team</option>
+            <option value="join">Join an existing team</option>
+            <option value="solo">Work independently for now</option>
+          </select>
+        </div>
+        <div class="form-actions" style="border:none; padding-top:0;">
+          <button type="button" class="btn btn--ghost" id="solver-cancel">Cancel</button>
+          <button type="submit" class="btn btn--primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; 2026 Problem2Impact</span>
+      <span>Built to connect societal challenges with the people who can solve them.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/problem-details.js"></script>
+</body>
+</html>

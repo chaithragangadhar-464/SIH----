@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile — Problem2Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/profile.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container page-section">
+    <div id="profile-loading"><div class="state-message"><div class="spinner"></div><p>Loading profile...</p></div></div>
+
+    <div id="profile-content" hidden>
+      <div class="profile-header">
+        <div class="profile-avatar" id="profile-avatar">?</div>
+        <div>
+          <h1 id="profile-name" style="margin-bottom:2px;"></h1>
+          <p style="margin:0; color:var(--color-text-muted);" id="profile-role-org"></p>
+          <div class="profile-tags" id="profile-interests"></div>
+        </div>
+        <div style="margin-left:auto;">
+          <button type="button" class="btn btn--outline btn--small" id="edit-profile-btn">Edit Profile</button>
+        </div>
+      </div>
+
+      <div class="profile-tabs" role="tablist">
+        <button type="button" class="profile-tab profile-tab--active" data-tab="skills">Skills</button>
+        <button type="button" class="profile-tab" data-tab="certifications">Certifications</button>
+        <button type="button" class="profile-tab" data-tab="projects">Projects / Solutions</button>
+        <button type="button" class="profile-tab" data-tab="teams">Teams</button>
+        <button type="button" class="profile-tab" data-tab="achievements">Achievements</button>
+      </div>
+
+      <section class="profile-tab-panel" id="panel-skills">
+        <h3>Skills</h3>
+        <div class="skill-chip-list" id="skills-list"></div>
+        <h3 style="margin-top:24px;">Location</h3>
+        <p id="profile-location"></p>
+      </section>
+
+      <section class="profile-tab-panel" id="panel-certifications" hidden>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h3 style="margin:0;">Certifications</h3>
+          <button type="button" class="btn btn--outline btn--small" id="add-cert-toggle">Upload Certificate</button>
+        </div>
+
+        <form id="add-cert-form" class="card" hidden style="margin-bottom:20px;">
+          <div class="field-row">
+            <div class="field">
+              <label for="cert-name">Certificate Name</label>
+              <input type="text" id="cert-name" required />
+            </div>
+            <div class="field">
+              <label for="cert-skill">Skill</label>
+              <input type="text" id="cert-skill" required />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="cert-org">Issuing Organization</label>
+              <input type="text" id="cert-org" required />
+            </div>
+            <div class="field">
+              <label for="cert-file">Certificate File</label>
+              <input type="file" id="cert-file" required />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn--ghost" id="add-cert-cancel">Cancel</button>
+            <button type="submit" class="btn btn--primary">Upload</button>
+          </div>
+        </form>
+
+        <div id="certifications-list"><div class="spinner"></div></div>
+      </section>
+
+      <section class="profile-tab-panel" id="panel-projects" hidden>
+        <h3>Projects / Solutions</h3>
+        <div id="projects-list"><div class="spinner"></div></div>
+      </section>
+
+      <section class="profile-tab-panel" id="panel-teams" hidden>
+        <h3>Teams</h3>
+        <div id="teams-list"><div class="spinner"></div></div>
+      </section>
+
+      <section class="profile-tab-panel" id="panel-achievements" hidden>
+        <h3>Achievements & Recognition</h3>
+        <div id="achievements-list"><div class="spinner"></div></div>
+      </section>
+    </div>
+
+    <div id="profile-error" hidden></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; 2026 Problem2Impact</span>
+      <span>Built to connect societal challenges with the people who can solve them.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

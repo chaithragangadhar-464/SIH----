@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post a Problem — Problem2Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/post-problem.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container page-section">
+    <div class="form-shell">
+      <div class="page-header" style="border:none; padding-top:0;">
+        <h1>Post a Problem</h1>
+        <p class="lede">Describe the challenge clearly and back it with evidence — this helps the community and AI classification understand it accurately.</p>
+      </div>
+
+      <div class="auth-alert auth-alert--error" id="post-error" role="alert"></div>
+
+      <div class="card">
+        <form id="post-problem-form" novalidate>
+          <div class="field" id="field-title">
+            <label for="title">Problem Title</label>
+            <input type="text" id="title" required />
+            <div class="field-error">Please provide a title.</div>
+          </div>
+
+          <div class="field" id="field-description">
+            <label for="description">Detailed Problem Description</label>
+            <textarea id="description" required></textarea>
+            <div class="field-error">Please describe the problem.</div>
+          </div>
+
+          <div class="field" id="field-affected">
+            <label for="affected">Who is affected?</label>
+            <textarea id="affected" required></textarea>
+            <div class="field-error">This field is required.</div>
+          </div>
+
+          <div class="field" id="field-location">
+            <label for="location">Where is the problem occurring?</label>
+            <input type="text" id="location" required />
+            <div class="field-error">This field is required.</div>
+          </div>
+
+          <div class="field" id="field-importance">
+            <label for="importance">Why is solving this problem important?</label>
+            <textarea id="importance" required></textarea>
+            <div class="field-error">This field is required.</div>
+          </div>
+
+          <div class="field" id="field-consequence">
+            <label for="consequence">What happens if the problem remains unsolved?</label>
+            <textarea id="consequence"></textarea>
+          </div>
+
+          <div class="field" id="field-existing-attempts">
+            <label for="existing-attempts">Existing attempts or solutions</label>
+            <textarea id="existing-attempts" placeholder="Optional — mention any prior attempts you're aware of."></textarea>
+          </div>
+
+          <div class="field" id="field-expected-impact">
+            <label for="expected-impact">Expected impact</label>
+            <textarea id="expected-impact" required></textarea>
+            <div class="field-error">This field is required.</div>
+          </div>
+
+          <div class="field">
+            <label for="evidence-input">Evidence / Supporting Documents</label>
+            <div class="file-drop" id="file-drop">
+              <input type="file" id="evidence-input" multiple accept="image/*,.pdf,.doc,.docx" />
+              <p style="margin:0;">Click to upload images, PDFs or documents, or drag files here.</p>
+            </div>
+            <div class="file-list" id="file-list"></div>
+          </div>
+
+          <div class="form-actions">
+            <a href="dashboard.html" class="btn btn--ghost">Cancel</a>
+            <button type="submit" class="btn btn--primary" id="post-submit">Submit Problem</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; 2026 Problem2Impact</span>
+      <span>Built to connect societal challenges with the people who can solve them.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/post-problem.js"></script>
+</body>
+</html>
