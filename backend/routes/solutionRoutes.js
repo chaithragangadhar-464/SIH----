@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
+  getMySolutions,
   getSolutionById,
   updateSolution,
   deleteSolution,
@@ -16,6 +17,7 @@ const { protect } = require('../middleware/authMiddleware');
 const { uploadSolutionFiles } = require('../middleware/uploadMiddleware');
 const { ratingValidators, mongoIdParam } = require('../utils/validators');
 
+router.get('/mine', protect, getMySolutions);
 router.get('/:id', mongoIdParam('id'), getSolutionById);
 router.put('/:id', protect, mongoIdParam('id'), updateSolution);
 router.delete('/:id', protect, mongoIdParam('id'), deleteSolution);

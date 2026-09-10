@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const formData = new FormData();
     formData.append("title", document.getElementById("title").value.trim());
     formData.append("description", document.getElementById("description").value.trim());
-    formData.append("affectedPopulation", document.getElementById("affected").value.trim());
+    formData.append("affectedPeople", document.getElementById("affected").value.trim());
     formData.append("location", document.getElementById("location").value.trim());
     formData.append("importance", document.getElementById("importance").value.trim());
     formData.append("consequence", document.getElementById("consequence").value.trim());

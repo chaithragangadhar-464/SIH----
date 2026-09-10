@@ -76,11 +76,20 @@ function renderProblemMiniList(container, problems, emptyText) {
   `;
 }
 
+function unwrapListResponse(data, key) {
+  if (Array.isArray(data)) return data;
+  if (data && Array.isArray(data[key])) return data[key];
+  if (data && data.data && Array.isArray(data.data[key])) return data.data[key];
+  if (data && data.data && Array.isArray(data.data)) return data.data;
+  if (data && typeof data === "object" && key in data) return data[key] || [];
+  return [];
+}
+
 async function loadProblemSection(container, fetchFn, emptyText) {
   renderLoading(container, "Loading problems...");
   try {
     const data = await fetchFn();
-    const problems = data.problems || data || [];
+    const problems = unwrapListResponse(data, "problems");
     renderProblemMiniList(container, problems, emptyText);
   } catch (error) {
     renderError(container, error.message, () => loadProblemSection(container, fetchFn, emptyText));
@@ -92,7 +101,7 @@ async function loadNotifications() {
   renderLoading(container, "Loading notifications...");
   try {
     const data = await getNotifications();
-    const notifications = (data.notifications || data || []).slice(0, 5);
+    const notifications = unwrapListResponse(data, "notifications").slice(0, 5);
     if (notifications.length === 0) {
       renderEmpty(container, "No notifications yet.");
       return;
@@ -123,7 +132,7 @@ async function loadActiveSolutions() {
   renderLoading(container, "Loading your solutions...");
   try {
     const data = await getMySolutions();
-    const solutions = data.solutions || data || [];
+    const solutions = unwrapListResponse(data, "solutions");
     if (solutions.length === 0) {
       renderEmpty(container, "You haven't submitted any solutions yet.");
       return;
@@ -154,7 +163,7 @@ async function loadTeamInvitations() {
   renderLoading(container, "Loading invitations...");
   try {
     const data = await getTeamInvitations();
-    const invitations = data.invitations || data || [];
+    const invitations = unwrapListResponse(data, "invitations");
     if (invitations.length === 0) {
       renderEmpty(container, "You don't have any team invitations.");
       return;

@@ -23,11 +23,33 @@ const app = express();
 // 1. Connect to MongoDB
 connectDB();
 
-// 2. Configure CORS — restrict to the configured frontend origin.
-const allowedOrigin = process.env.FRONTEND_URL || 'http://127.0.0.1:5500';
+// 2. Configure CORS for local development and the deployed frontend origin.
+const configuredFrontendOrigins = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const allowedOrigins = [
+  ...new Set([
+    ...configuredFrontendOrigins,
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+  ]),
+];
+
 app.use(
   cors({
-    origin: allowedOrigin,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   })
 );

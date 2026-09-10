@@ -70,6 +70,19 @@ const getSolutionsForProblem = async (req, res, next) => {
   }
 };
 
+// GET /api/solutions/mine
+const getMySolutions = async (req, res, next) => {
+  try {
+    const solutions = await Solution.find({ submittedBy: req.user._id })
+      .populate('problemId', 'title location status')
+      .populate('teamId', 'name')
+      .sort({ createdAt: -1 });
+    return success(res, { solutions, count: solutions.length });
+  } catch (err) {
+    next(err);
+  }
+};
+
 // GET /api/solutions/:id
 const getSolutionById = async (req, res, next) => {
   try {
@@ -185,6 +198,7 @@ const selectSolution = async (req, res, next) => {
 module.exports = {
   createSolution,
   getSolutionsForProblem,
+  getMySolutions,
   getSolutionById,
   updateSolution,
   deleteSolution,

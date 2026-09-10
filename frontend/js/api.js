@@ -68,6 +68,22 @@ async function apiRequest(endpoint, options = {}, isFormData = false) {
     throw new ApiError(message, response.status, data);
   }
 
+  if (data && Object.prototype.hasOwnProperty.call(data, "data")) {
+    const payload = data.data;
+
+    if (Array.isArray(payload)) {
+      return payload;
+    }
+
+    if (payload && typeof payload === "object") {
+      return {
+        ...payload,
+        success: data.success,
+        message: data.message,
+      };
+    }
+  }
+
   return data;
 }
 

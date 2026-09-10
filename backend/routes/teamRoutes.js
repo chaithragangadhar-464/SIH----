@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {
+  getMyTeams,
+  getMyInvitations,
   createTeam,
   getTeamById,
   inviteMember,
@@ -10,6 +12,8 @@ const {
 const { protect } = require('../middleware/authMiddleware');
 const { mongoIdParam } = require('../utils/validators');
 
+router.get('/mine', protect, getMyTeams);
+router.get('/invitations', protect, getMyInvitations);
 router.post('/', protect, createTeam);
 router.get('/:id', mongoIdParam('id'), getTeamById);
 router.post('/:id/invite', protect, mongoIdParam('id'), inviteMember);

@@ -8,10 +8,16 @@ let currentPage = 1;
 const PAGE_SIZE = 12;
 
 function buildQueryFromFilters() {
+  const statusMap = {
+    open: "open",
+    in_progress: "under-development",
+    solved: "completed"
+  };
+
   const query = {
     search: document.getElementById("filter-search").value.trim(),
     sector: document.getElementById("filter-sector").value,
-    status: document.getElementById("filter-status").value,
+    status: statusMap[document.getElementById("filter-status").value] || document.getElementById("filter-status").value,
     priority: document.getElementById("filter-priority").value,
     location: document.getElementById("filter-location").value.trim(),
     skills: document.getElementById("filter-skills").value.trim(),
@@ -31,12 +37,13 @@ function renderProblemCard(problem) {
   const id = problem.id || problem._id;
   const userHasVoted = Boolean(problem.hasVoted);
   const voteCount = problem.voteCount ?? problem.votes ?? null;
+  const priority = problem.priorityLevel || problem.priority;
 
   return `
     <article class="card problem-card" data-problem-id="${id}">
       <div class="card-top">
         <h3><a href="problem-details.html?id=${id}">${escapeHtml(problem.title)}</a></h3>
-        ${problem.priority ? `<span class="badge ${priorityBadgeClass(problem.priority)}">${escapeHtml(problem.priority)}</span>` : ""}
+        ${priority ? `<span class="badge ${priorityBadgeClass(priority)}">${escapeHtml(priority)}</span>` : ""}
       </div>
       <p class="card-desc">${escapeHtml((problem.description || "").slice(0, 160))}${(problem.description || "").length > 160 ? "…" : ""}</p>
       <div class="card-meta">

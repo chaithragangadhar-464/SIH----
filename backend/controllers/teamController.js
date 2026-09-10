@@ -1,8 +1,51 @@
 ﻿const Team = require('../models/Team');
 const User = require('../models/User');
 const Problem = require('../models/Problem');
+const Notification = require('../models/Notification');
 const { createNotification } = require('../services/notificationService');
 const { success, error } = require('../utils/response');
+
+// GET /api/teams/mine
+const getMyTeams = async (req, res, next) => {
+  try {
+    const teams = await Team.find({
+      $or: [
+        { leaderId: req.user._id },
+        { 'members.userId': req.user._id },
+      ],
+    })
+      .populate('problemId', 'title')
+      .populate('leaderId', 'name')
+      .sort({ createdAt: -1 });
+
+    return success(res, { teams, count: teams.length });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// GET /api/teams/invitations
+const getMyInvitations = async (req, res, next) => {
+  try {
+    const notifications = await Notification.find({
+      userId: req.user._id,
+      type: 'team-invite',
+    }).sort({ createdAt: -1 });
+
+    const invitations = notifications.map((notification) => ({
+      id: notification._id,
+      teamId: notification.relatedId,
+      teamName: notification.title || 'Team Invite',
+      message: notification.message,
+      invitedAt: notification.createdAt,
+      canRespond: true,
+    }));
+
+    return success(res, { invitations, count: invitations.length });
+  } catch (err) {
+    next(err);
+  }
+};
 
 // POST /api/teams
 const createTeam = async (req, res, next) => {
@@ -219,6 +262,8 @@ const removeMember = async (req, res, next) => {
 };
 
 module.exports = {
+  getMyTeams,
+  getMyInvitations,
   createTeam,
   getTeamById,
   inviteMember,

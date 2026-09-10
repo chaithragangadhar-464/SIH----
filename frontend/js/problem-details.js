@@ -10,46 +10,70 @@ let PROBLEM_ID = null;
 let CURRENT_PROBLEM = null;
 
 function renderProblem(problem) {
-  CURRENT_PROBLEM = problem;
+  const normalizedProblem = {
+    ...problem,
+    priority: problem.priorityLevel || problem.priority,
+    affectedPopulation: problem.affectedPeople || problem.affectedPopulation || "Not specified.",
+    sector: problem.sector || "Uncategorized",
+    subsector: problem.subSector || problem.subsector,
+    aiClassification: problem.aiClassification || (problem.aiConfidence != null ? {
+      sector: problem.sector,
+      subsector: problem.subSector,
+      confidence: problem.aiConfidence,
+    } : null),
+    evidence: Array.isArray(problem.evidence) ? problem.evidence.map((entry) => ({
+      ...entry,
+      name: entry.name || entry.fileName || "Evidence file",
+      url: typeof entry.url === 'string' ? entry.url : null,
+    })) : [],
+  };
+
+  CURRENT_PROBLEM = normalizedProblem;
   document.getElementById("problem-loading").hidden = true;
   document.getElementById("problem-content").hidden = false;
 
-  document.getElementById("pd-title").textContent = problem.title;
+  document.getElementById("pd-title").textContent = normalizedProblem.title;
 
   const priorityBadge = document.getElementById("pd-priority-badge");
-  if (problem.priority) {
-    priorityBadge.textContent = `${problem.priority} Priority`;
-    priorityBadge.className = `badge ${priorityBadgeClass(problem.priority)}`;
+  if (normalizedProblem.priority) {
+    priorityBadge.textContent = `${normalizedProblem.priority} Priority`;
+    priorityBadge.className = `badge ${priorityBadgeClass(normalizedProblem.priority)}`;
   } else {
     priorityBadge.hidden = true;
   }
 
   document.getElementById("pd-meta-row").innerHTML = [
-    problem.sector,
-    problem.subsector,
-    problem.location,
-    problem.status
+    normalizedProblem.sector,
+    normalizedProblem.subsector,
+    normalizedProblem.location,
+    normalizedProblem.status
   ]
     .filter(Boolean)
     .map((v) => `<span>${escapeHtml(v)}</span>`)
     .join(" · ");
 
-  document.getElementById("pd-description").textContent = problem.description || "";
-  document.getElementById("pd-affected").textContent = problem.affectedPopulation || "Not specified.";
-  document.getElementById("pd-importance").textContent = problem.importance || "Not specified.";
+  document.getElementById("pd-description").textContent = normalizedProblem.description || "";
+  document.getElementById("pd-affected").textContent = normalizedProblem.affectedPopulation || "Not specified.";
+  document.getElementById("pd-importance").textContent = normalizedProblem.importance || "Not specified.";
 
-  document.getElementById("pd-status").textContent = problem.status || "—";
-  document.getElementById("pd-sector").textContent = problem.sector || "—";
-  document.getElementById("pd-location").textContent = problem.location || "—";
-  document.getElementById("pd-posted-by").textContent = problem.postedBy?.name || problem.postedByName || "—";
-  document.getElementById("pd-created").textContent = formatDate(problem.createdAt);
+  document.getElementById("pd-status").textContent = normalizedProblem.status || "—";
+  document.getElementById("pd-sector").textContent = normalizedProblem.sector || "—";
+  document.getElementById("pd-location").textContent = normalizedProblem.location || "—";
+  document.getElementById("pd-posted-by").textContent = normalizedProblem.postedBy?.name || normalizedProblem.postedByName || "—";
+  document.getElementById("pd-created").textContent = formatDate(normalizedProblem.createdAt);
 
   // Evidence
   const evidenceBlock = document.getElementById("pd-evidence-block");
   const evidenceList = document.getElementById("pd-evidence-list");
-  if (problem.evidence && problem.evidence.length > 0) {
-    evidenceList.innerHTML = problem.evidence
-      .map((e) => `<a class="pd-evidence-item" href="${e.url}" target="_blank" rel="noopener">📎 ${escapeHtml(e.name || "Evidence file")}</a>`)
+  if (normalizedProblem.evidence && normalizedProblem.evidence.length > 0) {
+    evidenceList.innerHTML = normalizedProblem.evidence
+      .map((e) => {
+        const label = escapeHtml(e.name || "Evidence file");
+        if (e.url && /^https?:\/\//i.test(e.url)) {
+          return `<a class="pd-evidence-item" href="${e.url}" target="_blank" rel="noopener">📎 ${label}</a>`;
+        }
+        return `<div class="pd-evidence-item">📎 ${label}</div>`;
+      })
       .join("");
   } else {
     evidenceBlock.hidden = true;

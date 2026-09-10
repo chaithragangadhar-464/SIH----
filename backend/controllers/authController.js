@@ -3,6 +3,14 @@ const bcrypt = require('bcryptjs');
 const generateToken = require('../utils/generateToken');
 const { success, error } = require('../utils/response');
 
+const parseCsvList = (value) => {
+  if (Array.isArray(value)) return value.map((item) => String(item).trim()).filter(Boolean);
+  if (typeof value === 'string') return value.split(',').map((item) => item.trim()).filter(Boolean);
+  return undefined;
+};
+
+const firstDefined = (...values) => values.find((value) => value !== undefined && value !== null && value !== '');
+
 // POST /api/auth/register
 const register = async (req, res, next) => {
   try {
@@ -13,8 +21,8 @@ const register = async (req, res, next) => {
       role,
       phone,
       location,
-      organization,
-      designation,
+      organization: organizationFromBody,
+      designation: designationFromBody,
       course,
       branch,
       year,
@@ -22,7 +30,23 @@ const register = async (req, res, next) => {
       specialization,
       skills,
       interests,
+      college,
+      institution,
+      companyName,
+      universityName,
+      officialEmail,
+      industrySector,
+      departments,
+      expertise,
+      contactPerson,
+      website,
     } = req.body;
+
+    const organization = firstDefined(organizationFromBody, college, institution, companyName, universityName);
+    const designation = firstDefined(designationFromBody, contactPerson, website);
+    const resolvedResearchArea = firstDefined(researchArea, specialization, expertise, industrySector);
+    const resolvedSkills = parseCsvList(skills) || parseCsvList(req.body.skill) || undefined;
+    const resolvedInterests = parseCsvList(interests) || parseCsvList(req.body.interestsText) || undefined;
 
     const existingUser = await User.findOne({
       email: email.toLowerCase(),
@@ -54,14 +78,11 @@ const register = async (req, res, next) => {
       course,
       branch,
       year,
-      researchArea,
+      researchArea: resolvedResearchArea,
       specialization,
-      skills: Array.isArray(skills)
-        ? skills
-        : undefined,
-      interests: Array.isArray(interests)
-        ? interests
-        : undefined,
+      skills: resolvedSkills,
+      interests: resolvedInterests,
+      departments: parseCsvList(departments),
     });
 
     const token = generateToken(

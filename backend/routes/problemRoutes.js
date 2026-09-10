@@ -8,6 +8,7 @@ const {
   updateProblem,
   deleteProblem,
   getRecommendations,
+  getRecommendedCollaborators,
 } = require('../controllers/problemController');
 
 const {
@@ -76,6 +77,12 @@ router.get(
   '/:id/recommendations',
   mongoIdParam('id'),
   getRecommendations
+);
+
+router.get(
+  '/:id/recommended-collaborators',
+  mongoIdParam('id'),
+  getRecommendedCollaborators
 );
 
 router.post(

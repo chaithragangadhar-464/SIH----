@@ -29,16 +29,17 @@ const addComment = async (req, res, next) => {
       return error(res, 'Problem not found', 404);
     }
 
-    const { content } = req.body;
+    const { content, text } = req.body;
+    const commentText = content ?? text;
 
-    if (!content || !content.trim()) {
+    if (!commentText || !String(commentText).trim()) {
       return error(res, 'Comment content is required', 400);
     }
 
     const comment = await Comment.create({
       problemId: req.params.id,
       userId: req.user._id,
-      content,
+      content: String(commentText).trim(),
     });
 
     await recalculatePriority(req.params.id);

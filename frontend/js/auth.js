@@ -66,7 +66,7 @@ async function loadCurrentUser() {
 
   try {
     const response = await getCurrentUser();
-    const user = response.user || response;
+    const user = response.data?.user || response.data || response.user || response;
     cacheUser(user);
     return user;
   } catch (error) {

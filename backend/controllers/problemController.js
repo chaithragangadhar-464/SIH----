@@ -10,8 +10,17 @@ const { success, error } = require('../utils/response');
 // POST /api/problems
 const createProblem = async (req, res, next) => {
   try {
-    const { title, description, importance, affectedPeople, location, existingAttempts, expectedImpact } =
-      req.body;
+    const {
+      title,
+      description,
+      importance,
+      affectedPeople,
+      affectedPopulation,
+      location,
+      existingAttempts,
+      expectedImpact,
+      consequence,
+    } = req.body;
 
     const evidence = (req.files || []).map((file) => ({
       fileName: file.originalname,
@@ -24,8 +33,8 @@ const createProblem = async (req, res, next) => {
     let problem = await Problem.create({
       title,
       description,
-      importance,
-      affectedPeople,
+      importance: importance ?? consequence,
+      affectedPeople: affectedPeople ?? affectedPopulation,
       location,
       existingAttempts,
       expectedImpact,
@@ -205,6 +214,18 @@ const getRecommendations = async (req, res, next) => {
   }
 };
 
+const getRecommendedCollaborators = async (req, res, next) => {
+  try {
+    const recommendations = await getRecommendations(req, res, next);
+    if (recommendations) {
+      return recommendations;
+    }
+    return success(res, { collaborators: [] });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createProblem,
   listProblems,
@@ -213,4 +234,5 @@ module.exports = {
   deleteProblem,
   recalculatePriority,
   getRecommendations,
+  getRecommendedCollaborators,
 };
